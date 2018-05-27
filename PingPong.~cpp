@@ -12,9 +12,9 @@ using namespace std;
 
 TPingPongWindow *PingPongWindow;
 
-int x = +3, y = +3;
-int player1Counter = 0, player2Counter = 0;
-
+int x = 4, y = 4;
+int player1Counter = 0, player2Counter = 0, hitsCounter = 0;
+bool restart = false;
 //---------------------------------------------------------------------------
 __fastcall TPingPongWindow::TPingPongWindow(TComponent* Owner)
         : TForm(Owner)
@@ -29,6 +29,7 @@ void __fastcall TPingPongWindow::FormKeyDown(TObject *Sender, WORD &Key,
   if(Key==0x53) LeftPaddleDown->Enabled=true;
   if(Key==VK_UP) RightPaddleUp->Enabled=true;
   if(Key==VK_DOWN) RightPaddleDown->Enabled=true;
+  if((Key==VK_RETURN)&&(restart==false)) BallTimer->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TPingPongWindow::FormKeyUp(TObject *Sender, WORD &Key,
@@ -78,44 +79,76 @@ RightPaddle->Top += 10;
 void __fastcall TPingPongWindow::BallTimerTimer(TObject *Sender)
 {
 
-Ball->Left+=x; Ball->Top+=y;
+Ball->Left += x; Ball->Top += y;
 
 
 if (Ball->Top <= WallTop->Top + WallTop->Height) y=-y;
 if ((Ball->Top + Ball->Height) >= WallBottom->Top) y=-y;
 
-if ((Ball->Top <= LeftPaddle->Top + LeftPaddle->Height)
-&& (Ball->Top + Ball->Height >= LeftPaddle->Top)
-&& (Ball->Left <= LeftPaddle->Left + LeftPaddle->Width))
+if ((Ball->Top - Ball->Height/2 <= LeftPaddle->Top + LeftPaddle->Height)
+&& (Ball->Top + Ball->Height/2 >= LeftPaddle->Top)
+&& (Ball->Left <= LeftPaddle->Left + LeftPaddle->Width)
+&& (LeftPaddle->Left + LeftPaddle->Width - Ball->Left < 4))
 {
 playSound("paddleHit1");
 x=-x;
+hitsCounter++;
+if(hitsCounter%3 == 0)
+{
+x++; y++;
+}
 }
 
-if (Ball->Left + Ball->Width < LeftPaddle->Left)
+if (Ball->Left + Ball->Width >= Background->Width)
 {
-playSound("lost");
 BallTimer->Enabled = false;
+playSound("lost");
 player2Counter++;
 Player2Score->Caption = player2Counter;
+if (player2Counter >= 3)
+{
+Ball->Visible = false;
+restart = true;
+WinnerInfoButton->Caption = "Player 2 won! Once again?";
+WinnerInfoButton->Visible = true;
+}
+else
+{
 resetPositions();
+}
 }
 
 if ((Ball->Top <= RightPaddle->Top + RightPaddle->Height)
 && (Ball->Top + Ball->Height >= RightPaddle->Top)
-&& (Ball->Left + Ball->Width >= RightPaddle->Left))
+&& (Ball->Left + Ball->Width >= RightPaddle->Left)
+&& (Ball->Left + Ball->Width - RightPaddle->Left < 4 ))
 {
 playSound("paddleHit1");
 x=-x;
+hitsCounter++;
+if(hitsCounter%3 == 0)
+{
+x+=1; y+=1;
+}
 }
 
-if (Ball->Left > RightPaddle->Left + RightPaddle->Width)
+if (Ball->Left <= Background->Left)
 {
-playSound("lost");
 BallTimer->Enabled = false;
+playSound("lost");
 player1Counter++;
 Player1Score->Caption = player1Counter;
+if (player1Counter >= 3)
+{
+Ball->Visible = false;
+restart = true;
+WinnerInfoButton->Caption = "Player 1 won! Once again?";
+WinnerInfoButton->Visible = true;
+}
+else
+{
 resetPositions();
+}
 }
 
 }
@@ -133,9 +166,22 @@ void __fastcall TPingPongWindow::resetPositions()
 {
 LeftPaddle->Left = 30; LeftPaddle->Top = 200;
 RightPaddle->Left = 704; RightPaddle->Top = 200;
-
 Ball->Left = 361; Ball->Top = 224;
-Sleep(2000);
-BallTimer->Enabled = true;
+y = 4; x = 4;
+
 }
+
+
+void __fastcall TPingPongWindow::WinnerInfoButtonClick(TObject *Sender)
+{
+player1Counter = 0;
+player2Counter = 0;
+Player1Score->Caption = player1Counter;
+Player2Score->Caption = player2Counter;
+WinnerInfoButton->Visible = false;
+resetPositions();
+restart = false;
+Ball->Visible = true;
+}
+//---------------------------------------------------------------------------
 

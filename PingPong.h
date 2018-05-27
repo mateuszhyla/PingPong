@@ -29,6 +29,7 @@ __published:	// IDE-managed Components
         TLabel *Player2Name;
         TLabel *Player1Score;
         TLabel *Player2Score;
+        TButton *WinnerInfoButton;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -38,10 +39,12 @@ __published:	// IDE-managed Components
         void __fastcall RightPaddleUpTimer(TObject *Sender);
         void __fastcall RightPaddleDownTimer(TObject *Sender);
         void __fastcall BallTimerTimer(TObject *Sender);
+        void __fastcall WinnerInfoButtonClick(TObject *Sender);
 
 private:
         void __fastcall playSound(string);
         void __fastcall resetPositions();
+        void __fastcall setBallMovementDirection();
        	// User declarations
 public:		// User declarations
         __fastcall TPingPongWindow(TComponent* Owner);
