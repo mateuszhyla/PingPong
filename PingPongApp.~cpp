@@ -10,7 +10,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         try
         {
                  Application->Initialize();
-                 Application->CreateForm(__classid(TPingPongWindow), &PingPongWindow);
+                 Application->CreateForm(__classid(TForm1), &PingPongWindow);
                  Application->Run();
         }
         catch (Exception &exception)

@@ -22,6 +22,8 @@ __published:	// IDE-managed Components
         TTimer *RightPaddleUp;
         TImage *Ball;
         TTimer *BallTimer;
+        TImage *WallTop;
+        TImage *WallBottom;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -31,7 +33,10 @@ __published:	// IDE-managed Components
         void __fastcall RightPaddleUpTimer(TObject *Sender);
         void __fastcall RightPaddleDownTimer(TObject *Sender);
         void __fastcall BallTimerTimer(TObject *Sender);
-private:	// User declarations
+
+private:
+        void __fastcall playSound();
+       	// User declarations
 public:		// User declarations
         __fastcall TPingPongWindow(TComponent* Owner);
 };
