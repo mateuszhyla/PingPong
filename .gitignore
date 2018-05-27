@@ -1,0 +1,9 @@
+/bin
+/obj
+*.bpi
+*.lib
+*.hpp
+*.i
+*.il?
+*.#??
+*.pbi
