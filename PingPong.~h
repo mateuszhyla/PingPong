@@ -9,6 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
+
 //---------------------------------------------------------------------------
 class TPingPongWindow : public TForm
 {
@@ -24,6 +25,10 @@ __published:	// IDE-managed Components
         TTimer *BallTimer;
         TImage *WallTop;
         TImage *WallBottom;
+        TLabel *Player1Name;
+        TLabel *Player2Name;
+        TLabel *Player1Score;
+        TLabel *Player2Score;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -35,7 +40,9 @@ __published:	// IDE-managed Components
         void __fastcall BallTimerTimer(TObject *Sender);
 
 private:
-        void playSound();	// User declarations
+        void __fastcall playSound(string);
+        void __fastcall resetPositions();
+       	// User declarations
 public:		// User declarations
         __fastcall TPingPongWindow(TComponent* Owner);
 };

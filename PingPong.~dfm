@@ -1,6 +1,6 @@
 object PingPongWindow: TPingPongWindow
-  Left = 192
-  Top = 125
+  Left = 247
+  Top = 98
   AutoScroll = False
   Caption = 'PingPongWindow'
   ClientHeight = 472
@@ -25,7 +25,7 @@ object PingPongWindow: TPingPongWindow
     Brush.Color = clGradientActiveCaption
   end
   object LeftPaddle: TImage
-    Left = 24
+    Left = 30
     Top = 200
     Width = 16
     Height = 80
@@ -157,7 +157,7 @@ object PingPongWindow: TPingPongWindow
   end
   object RightPaddle: TImage
     Left = 704
-    Top = 192
+    Top = 200
     Width = 16
     Height = 80
     AutoSize = True
@@ -287,7 +287,7 @@ object PingPongWindow: TPingPongWindow
       B122}
   end
   object Ball: TImage
-    Left = 352
+    Left = 361
     Top = 224
     Width = 29
     Height = 29
@@ -2509,6 +2509,67 @@ object PingPongWindow: TPingPongWindow
       D3989FD1939BCA9AA3CD9097C7A2B0CB7F89A5686DB6686CB37071B87177B97B
       83C17B82C28992CB8892C5919FC9989FD1939BCA0000}
   end
+  object Player1Name: TLabel
+    Left = 232
+    Top = 8
+    Width = 71
+    Height = 25
+    Alignment = taRightJustify
+    Caption = 'Player 1'
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMenu
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Player2Name: TLabel
+    Left = 448
+    Top = 8
+    Width = 73
+    Height = 25
+    Caption = 'Player 2'
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMenu
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Player1Score: TLabel
+    Left = 329
+    Top = 8
+    Width = 13
+    Height = 29
+    Caption = '0'
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMenu
+    Font.Height = -24
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Player2Score: TLabel
+    Left = 408
+    Top = 8
+    Width = 13
+    Height = 29
+    Caption = '0'
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMenu
+    Font.Height = -24
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
   object LeftPaddleUp: TTimer
     Enabled = False
     Interval = 20
@@ -2540,7 +2601,7 @@ object PingPongWindow: TPingPongWindow
   object BallTimer: TTimer
     Interval = 14
     OnTimer = BallTimerTimer
-    Left = 352
-    Top = 8
+    Left = 360
+    Top = 184
   end
 end
